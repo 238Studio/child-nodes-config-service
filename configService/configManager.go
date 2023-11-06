@@ -25,7 +25,7 @@ func (conf *ConfigManager) CreateConfigTable(module string) error {
 		if os.IsNotExist(err) {
 			_, _ = os.Create(file)
 		} else {
-			return util.NewError(_const.CommonException, _const.CreateConfigTableError, false, err)
+			return util.NewError(_const.CommonException, _const.CreateConfigTableError, err)
 		}
 	} else {
 		return nil
@@ -42,7 +42,7 @@ func (conf *ConfigManager) DeleteConfigTable(module string) error {
 	//从viperList中删除该模块
 	delete(viperList, module)
 
-	return util.NewError(_const.CommonException, _const.DeleteConfigTableError, false, err)
+	return util.NewError(_const.CommonException, _const.DeleteConfigTableError, err)
 }
 
 // ReadConfig 某个模块根据模块-配置名 读取相应配置
@@ -51,12 +51,12 @@ func (conf *ConfigManager) DeleteConfigTable(module string) error {
 func (conf *ConfigManager) ReadConfig(module string, configItem string) (error, string) {
 	v, isExist := viperList[module]
 	if !isExist {
-		return util.NewError(_const.CommonException, _const.ConfigModuleNotExist, false, errors.New(module+"模块不存在")), ""
+		return util.NewError(_const.CommonException, _const.ConfigModuleNotExist, errors.New(module+"模块不存在")), ""
 	}
 
 	//v.SetConfigName(module)
 	err := v.ReadInConfig()
-	item, err := v.GetString(configItem), util.NewError(_const.CommonException, _const.ReadConfigError, false, err)
+	item, err := v.GetString(configItem), util.NewError(_const.CommonException, _const.ReadConfigError, err)
 	return nil, item
 }
 
@@ -75,13 +75,13 @@ func (conf *ConfigManager) readConfigC(module string, configItem string, item *s
 func (conf *ConfigManager) DeleteConfig(module string, configItem string) error {
 	v, isExist := viperList[module]
 	if !isExist {
-		return util.NewError(_const.CommonException, _const.ConfigModuleNotExist, false, errors.New(module+"模块不存在"))
+		return util.NewError(_const.CommonException, _const.ConfigModuleNotExist, errors.New(module+"模块不存在"))
 	}
 
 	v.Set(configItem, nil)
 	//todo
 	err := v.WriteConfig()
-	return util.NewError(_const.CommonException, _const.WriteConfigError, false, err)
+	return util.NewError(_const.CommonException, _const.WriteConfigError, err)
 }
 
 // SetConfig 设置该项配置
@@ -90,7 +90,7 @@ func (conf *ConfigManager) DeleteConfig(module string, configItem string) error 
 func (conf *ConfigManager) SetConfig(module string, configItems map[string]string) error {
 	v, isExist := viperList[module]
 	if !isExist {
-		return util.NewError(_const.CommonException, _const.ConfigModuleNotExist, false, errors.New(module+"模块不存在"))
+		return util.NewError(_const.CommonException, _const.ConfigModuleNotExist, errors.New(module+"模块不存在"))
 	}
 
 	for configItem, item := range configItems {
@@ -98,5 +98,5 @@ func (conf *ConfigManager) SetConfig(module string, configItems map[string]strin
 	}
 
 	err := v.WriteConfig()
-	return util.NewError(_const.CommonException, _const.WriteConfigError, false, err)
+	return util.NewError(_const.CommonException, _const.WriteConfigError, err)
 }

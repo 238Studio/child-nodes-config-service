@@ -3,8 +3,7 @@ module github.com/UniversalRobotDriveTeam/child-nodes-config-service
 go 1.21.1
 
 require (
-	github.com/UniversalRobotDriveTeam/child-nodes-assist v1.0.2
-	github.com/UniversalRobotDriveTeam/child-nodes-basic v1.0.0
+	github.com/UniversalRobotDriveTeam/child-nodes-assist v1.0.6-0.20231106065558-10e73cb5e208
 	github.com/spf13/viper v1.17.0
 )
 

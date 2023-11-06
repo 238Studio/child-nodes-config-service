@@ -40,6 +40,8 @@ github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03
 github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym/WlBOVXweHU+Q+/VP0lqqI8lqeDx9IjBqo=
 github.com/UniversalRobotDriveTeam/child-nodes-assist v1.0.2 h1:xwGGhrJgRFEQVxWDLZfG9vCjlj3JfRuHpp6WPBiEdOI=
 github.com/UniversalRobotDriveTeam/child-nodes-assist v1.0.2/go.mod h1:Bt1nL4+xQ5ns+fatFxE0xoiuiE5NeoAMPcraY6TxilY=
+github.com/UniversalRobotDriveTeam/child-nodes-assist v1.0.6-0.20231105034323-ccafcf6b0b63/go.mod h1:Bt1nL4+xQ5ns+fatFxE0xoiuiE5NeoAMPcraY6TxilY=
+github.com/UniversalRobotDriveTeam/child-nodes-assist v1.0.6-0.20231106065558-10e73cb5e208/go.mod h1:Bt1nL4+xQ5ns+fatFxE0xoiuiE5NeoAMPcraY6TxilY=
 github.com/UniversalRobotDriveTeam/child-nodes-basic v1.0.0 h1:Nu3VaYAi5vQY5fvw+9vJajPT1z87vxfCg+I3K0F90rs=
 github.com/UniversalRobotDriveTeam/child-nodes-basic v1.0.0/go.mod h1:hYI8mewgFSaJex7g6mERhbBwC2HgvlvuR/36rE7P7zg=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
