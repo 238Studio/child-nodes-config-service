@@ -1,12 +1,13 @@
-package configService_test
+package config_test
 
 import (
-	"github.com/UniversalRobotDriveTeam/child-nodes-basic/robotBasicAPI/configService"
 	"testing"
+
+	config "github.com/UniversalRobotDriveTeam/child-nodes-config-service"
 )
 
 func TestDeleteConfig(t *testing.T) {
-	configManger := configService.InitConfigManager()
+	configManger := config.InitConfigManager("../../configs")
 
 	err := configManger.DeleteConfig("test", "test")
 	if err != nil {
@@ -15,7 +16,7 @@ func TestDeleteConfig(t *testing.T) {
 }
 
 func TestConfigDelete(t *testing.T) {
-	configManager := configService.InitConfigManager()
+	configManager := config.InitConfigManager("../../configs")
 	err := configManager.DeleteConfigTable("test")
 	if err != nil {
 		t.Error(err)
