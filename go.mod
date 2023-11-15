@@ -3,7 +3,7 @@ module github.com/238Studio/child-nodes-config-service
 go 1.21.1
 
 require (
-	github.com/238Studio/child-nodes-assist v1.0.6 // indirect
+	github.com/238Studio/child-nodes-assist v1.0.7 // indirect
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
