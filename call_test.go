@@ -3,7 +3,7 @@ package config_test
 import (
 	"testing"
 
-	config "github.com/UniversalRobotDriveTeam/child-nodes-config-service"
+	config "github.com/238Studio/child-nodes-config-service"
 )
 
 // 测试利用管道调用配置模块
