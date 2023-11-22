@@ -20,19 +20,25 @@ func (conf *ConfigManager) CreateConfigTable(module string) (err error) {
 		}
 	}()
 
+	//判断文件是否存在
 	file := conf.configPath + "/" + module + ".json"
 	if _, err := os.Stat(file); err != nil {
+		//文件不存在
 		if os.IsNotExist(err) {
+			//创建文件
 			_, err = os.Create(file)
 			if err != nil {
 				return util.NewError(_const.CommonException, _const.Config, err)
 			}
 		} else {
+			//其他错误
 			return util.NewError(_const.CommonException, _const.Config, err)
 		}
 	} else {
+		//文件存在,不做任何操作
 		return nil
 	}
+
 	return nil
 }
 
@@ -48,6 +54,7 @@ func (conf *ConfigManager) DeleteConfigTable(module string) (err error) {
 		}
 	}()
 
+	// 删除文件
 	err = os.Remove(conf.configPath + "/" + module + ".json")
 	if err != nil {
 		return util.NewError(_const.CommonException, _const.Config, err)
@@ -71,20 +78,20 @@ func (conf *ConfigManager) ReadConfig(module string, configItem string) (item st
 		}
 	}()
 
+	// 从viper list中读取该模块的viper对象
 	v, isExist := conf.viperList[module]
 	if !isExist {
 		return "", util.NewError(_const.CommonException, _const.Config, errors.New(module+"模块不存在"))
 	}
 
+	// 读取配置
 	err = v.ReadInConfig()
 	if err != nil {
 		return "", util.NewError(_const.CommonException, _const.Config, err)
 	}
 
-	item, err = v.GetString(configItem), util.NewError(_const.CommonException, _const.Config, err)
-	if err != nil {
-		return "", util.NewError(_const.CommonException, _const.Config, err)
-	}
+	// 读取配置项
+	item = v.GetString(configItem)
 
 	return item, nil
 }
@@ -101,11 +108,14 @@ func (conf *ConfigManager) DeleteConfig(module string, configItem string) (err e
 		}
 	}()
 
+	// 读取配置
 	v, isExist := conf.viperList[module]
+	// 不存在该模块,返回错误
 	if !isExist {
 		return util.NewError(_const.CommonException, _const.Config, errors.New(module+"模块不存在"))
 	}
 
+	// 删除配置(设置为nil)
 	v.Set(configItem, nil)
 	err = v.WriteConfig()
 	if err != nil {
@@ -127,15 +137,18 @@ func (conf *ConfigManager) SetConfig(module string, configItems map[string]strin
 		}
 	}()
 
+	// 从viper list中读取该模块的viper对象
 	v, isExist := conf.viperList[module]
 	if !isExist {
 		return util.NewError(_const.CommonException, _const.Config, errors.New(module+"模块不存在"))
 	}
 
+	// 从items中逐一加载配置，写入到config中去
 	for configItem, item := range configItems {
 		v.Set(configItem, item)
 	}
 
+	// 写入配置到文件
 	err = v.WriteConfig()
 	if err != nil {
 		return util.NewError(_const.CommonException, _const.Config, err)
