@@ -1,6 +1,12 @@
 package config
 
-import "github.com/spf13/viper"
+import (
+	"errors"
+
+	_const "github.com/238Studio/child-nodes-assist/const"
+	"github.com/238Studio/child-nodes-assist/util"
+	"github.com/spf13/viper"
+)
 
 // 配置相对路径
 //const configPath = "./configs/test.json"
@@ -21,10 +27,19 @@ func InitConfigManager(configPath string) *ConfigManager {
 // InitModuleConfig 初始化模块配置
 // 传入:模块名
 // 传出:无
-func (conf *ConfigManager) InitModuleConfig(moduleName string) {
+func (conf *ConfigManager) InitModuleConfig(moduleName string) (err error) {
+	defer func() {
+		if er := recover(); er != nil {
+			//panic错误，定级为fatal
+			//返回值赋值
+			err = util.NewError(_const.FatalException, _const.Network, errors.New(er.(string)))
+		}
+	}()
+
 	//初始化模块viper对象
 	conf.viperList[moduleName] = viper.New()
 	conf.viperList[moduleName].SetConfigType("json")
 	conf.viperList[moduleName].SetConfigName(moduleName)
 	conf.viperList[moduleName].AddConfigPath(conf.configPath + "/")
+	return nil
 }
