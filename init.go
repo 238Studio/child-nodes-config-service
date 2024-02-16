@@ -3,8 +3,7 @@ package config
 import (
 	"errors"
 
-	_const "github.com/238Studio/child-nodes-assist/const"
-	"github.com/238Studio/child-nodes-assist/util"
+	"github.com/238Studio/child-nodes-error-manager/errpack"
 	"github.com/spf13/viper"
 )
 
@@ -32,7 +31,7 @@ func (conf *ConfigManager) InitModuleConfig(moduleName string) (err error) {
 		if er := recover(); er != nil {
 			//panic错误，定级为fatal
 			//返回值赋值
-			err = util.NewError(_const.FatalException, _const.Network, errors.New(er.(string)))
+			err = errpack.NewError(errpack.FatalException, errpack.Network, errors.New(er.(string)))
 		}
 	}()
 

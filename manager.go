@@ -2,8 +2,9 @@ package config
 
 import (
 	"errors"
-	"github.com/238Studio/child-nodes-error-manager/errpack"
 	"os"
+
+	"github.com/238Studio/child-nodes-error-manager/errpack"
 )
 
 // CreateConfigTable 创建一个配置表单
