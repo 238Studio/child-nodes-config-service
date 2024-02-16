@@ -7,7 +7,7 @@ import (
 )
 
 func TestDeleteConfig(t *testing.T) {
-	configManger := config.InitConfigManager("../../configs")
+	configManger := config.InitConfigManager("./configs")
 
 	err := configManger.DeleteConfig("test", "test")
 	if err != nil {
@@ -16,7 +16,7 @@ func TestDeleteConfig(t *testing.T) {
 }
 
 func TestConfigDelete(t *testing.T) {
-	configManager := config.InitConfigManager("../../configs")
+	configManager := config.InitConfigManager("./configs")
 	err := configManager.DeleteConfigTable("test")
 	if err != nil {
 		t.Error(err)

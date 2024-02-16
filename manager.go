@@ -2,10 +2,8 @@ package config
 
 import (
 	"errors"
+	"github.com/238Studio/child-nodes-error-manager/errpack"
 	"os"
-
-	_const "github.com/238Studio/child-nodes-assist/const"
-	"github.com/238Studio/child-nodes-assist/util"
 )
 
 // CreateConfigTable 创建一个配置表单
@@ -17,7 +15,7 @@ func (conf *ConfigManager) CreateConfigTable(module string) error {
 		if os.IsNotExist(err) {
 			_, _ = os.Create(file)
 		} else {
-			return util.NewError(_const.CommonException, _const.Config, err)
+			return errpack.NewError(errpack.CommonException, errpack.Config, err)
 		}
 	} else {
 		return nil
@@ -34,7 +32,7 @@ func (conf *ConfigManager) DeleteConfigTable(module string) error {
 	//从viperList中删除该模块
 	delete(conf.viperList, module)
 
-	return util.NewError(_const.CommonException, _const.Config, err)
+	return errpack.NewError(errpack.CommonException, errpack.Config, err)
 }
 
 // ReadConfig 某个模块根据模块-配置名 读取相应配置
@@ -43,11 +41,11 @@ func (conf *ConfigManager) DeleteConfigTable(module string) error {
 func (conf *ConfigManager) ReadConfig(module string, configItem string) (string, error) {
 	v, isExist := conf.viperList[module]
 	if !isExist {
-		return "", util.NewError(_const.CommonException, _const.Config, errors.New(module+"模块不存在"))
+		return "", errpack.NewError(errpack.CommonException, errpack.Config, errors.New(module+"模块未在配置文件管理器内注册"))
 	}
 
 	err := v.ReadInConfig()
-	item, err := v.GetString(configItem), util.NewError(_const.CommonException, _const.Config, err)
+	item, err := v.GetString(configItem), errpack.NewError(errpack.CommonException, errpack.Config, err)
 	return item, nil
 }
 
@@ -57,12 +55,12 @@ func (conf *ConfigManager) ReadConfig(module string, configItem string) (string,
 func (conf *ConfigManager) DeleteConfig(module string, configItem string) error {
 	v, isExist := conf.viperList[module]
 	if !isExist {
-		return util.NewError(_const.CommonException, _const.Config, errors.New(module+"模块不存在"))
+		return errpack.NewError(errpack.CommonException, errpack.Config, errors.New(module+"模块未在配置文件管理器内注册"))
 	}
 
 	v.Set(configItem, nil)
 	err := v.WriteConfig()
-	return util.NewError(_const.CommonException, _const.Config, err)
+	return errpack.NewError(errpack.CommonException, errpack.Config, err)
 }
 
 // SetConfig 设置该项配置
@@ -71,7 +69,7 @@ func (conf *ConfigManager) DeleteConfig(module string, configItem string) error 
 func (conf *ConfigManager) SetConfig(module string, configItems map[string]string) error {
 	v, isExist := conf.viperList[module]
 	if !isExist {
-		return util.NewError(_const.CommonException, _const.Config, errors.New(module+"模块不存在"))
+		return errpack.NewError(errpack.CommonException, errpack.Config, errors.New(module+"模块未在配置文件管理器内注册"))
 	}
 
 	for configItem, item := range configItems {
@@ -79,5 +77,5 @@ func (conf *ConfigManager) SetConfig(module string, configItems map[string]strin
 	}
 
 	err := v.WriteConfig()
-	return util.NewError(_const.CommonException, _const.Config, err)
+	return errpack.NewError(errpack.CommonException, errpack.Config, err)
 }

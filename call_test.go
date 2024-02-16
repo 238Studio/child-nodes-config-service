@@ -38,5 +38,5 @@ func TestSetConfig(t *testing.T) {
 	item, _ := configManger.ReadConfig("test", "test")
 	t.Log(item)
 
-	//configManger.DeleteConfigTable("test")
+	configManger.DeleteConfigTable("test")
 }

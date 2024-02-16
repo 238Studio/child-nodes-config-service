@@ -40,6 +40,10 @@ github.com/238Studio/child-nodes-assist v1.0.6 h1:19SZ3ESzXjzyCVNhSfL7SivUa41GQ6
 github.com/238Studio/child-nodes-assist v1.0.6/go.mod h1:moO2jhZ3uqBflOqqhZncfQaRDsMj5Iz/vun+1uRpZ6w=
 github.com/238Studio/child-nodes-assist v1.0.7 h1:fl7CFT0692NS4MBpqGb+mx88+VRLTviginqmFejc6Q8=
 github.com/238Studio/child-nodes-assist v1.0.7/go.mod h1:moO2jhZ3uqBflOqqhZncfQaRDsMj5Iz/vun+1uRpZ6w=
+github.com/238Studio/child-nodes-assist v1.17.0 h1:KYYRceZ744sidv0MmaG+7XX4nyNCLr0g8PFebpPnO/g=
+github.com/238Studio/child-nodes-assist v1.17.0/go.mod h1:xzED3AH7uTWgFvZ1DeuO//DjgzjUvC4KIDct1dJ8Eiw=
+github.com/238Studio/child-nodes-error-manager v0.0.1 h1:BH5saKDHqdLUpqCugl3SZp7PCXs3AmNT4Uwb1s+gB+o=
+github.com/238Studio/child-nodes-error-manager v0.0.1/go.mod h1:sdH7hWskPx4rqr30G6KTu2T4sXIRTowJXSRjZJ8RlmM=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym/WlBOVXweHU+Q+/VP0lqqI8lqeDx9IjBqo=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
@@ -114,6 +118,8 @@ github.com/google/pprof v0.0.0-20201203190320-1bf35d6f28c2/go.mod h1:kpwsk12EmLe
 github.com/google/pprof v0.0.0-20201218002935-b9804c9f04c2/go.mod h1:kpwsk12EmLew5upagYY7GY0pfYCcupk39gWOCRROcvE=
 github.com/google/renameio v0.1.0/go.mod h1:KWCgfxg9yswjAJkECMjeO8J8rahYeXnNhOm40UhjYkI=
 github.com/google/uuid v1.1.2/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
+github.com/google/uuid v1.6.0 h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=
+github.com/google/uuid v1.6.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/googleapis/gax-go/v2 v2.0.4/go.mod h1:0Wqv26UfaUD9n4G6kQubkQ+KchISgw+vpHVxEJEs9eg=
 github.com/googleapis/gax-go/v2 v2.0.5/go.mod h1:DWXyrwAJ9X0FpwwEdw+IPEYBICEFu5mhpdKc/us6bOk=
 github.com/googleapis/google-cloud-go-testing v0.0.0-20200911160855-bcd43fbb19e8/go.mod h1:dvDLG8qkwmyD9a/MJJN3XJcT3xFxOKAvTZGvuZmac9g=
