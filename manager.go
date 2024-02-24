@@ -11,10 +11,14 @@ import (
 // 传入：模块名
 // 传出：无
 func (conf *ConfigManager) CreateConfigTable(module string) error {
-	file := conf.configPath + "/" + module + ".json"
-	if _, err := os.Stat(file); err != nil {
+	f := conf.configPath + "/" + module + ".json"
+	if _, err := os.Stat(f); err != nil {
 		if os.IsNotExist(err) {
-			_, _ = os.Create(file)
+			file, _ := os.Create(f)
+			err := file.Close() //关闭文件
+			if err != nil {
+				return errpack.NewError(errpack.CommonException, errpack.Config, err)
+			}
 		} else {
 			return errpack.NewError(errpack.CommonException, errpack.Config, err)
 		}
@@ -29,11 +33,14 @@ func (conf *ConfigManager) CreateConfigTable(module string) error {
 // 传出：无
 func (conf *ConfigManager) DeleteConfigTable(module string) error {
 	err := os.Remove(conf.configPath + "/" + module + ".json")
+	if err != nil {
+		return errpack.NewError(errpack.CommonException, errpack.Config, err)
+	}
 
 	//从viperList中删除该模块
 	delete(conf.viperList, module)
 
-	return errpack.NewError(errpack.CommonException, errpack.Config, err)
+	return nil
 }
 
 // ReadConfig 某个模块根据模块-配置名 读取相应配置
@@ -46,7 +53,11 @@ func (conf *ConfigManager) ReadConfig(module string, configItem string) (string,
 	}
 
 	err := v.ReadInConfig()
-	item, err := v.GetString(configItem), errpack.NewError(errpack.CommonException, errpack.Config, err)
+	if err != nil {
+		return "", errpack.NewError(errpack.CommonException, errpack.Config, err)
+	}
+
+	item := v.GetString(configItem)
 	return item, nil
 }
 
@@ -61,7 +72,11 @@ func (conf *ConfigManager) DeleteConfig(module string, configItem string) error 
 
 	v.Set(configItem, nil)
 	err := v.WriteConfig()
-	return errpack.NewError(errpack.CommonException, errpack.Config, err)
+	if err != nil {
+		return errpack.NewError(errpack.CommonException, errpack.Config, err)
+	}
+
+	return nil
 }
 
 // SetConfig 设置该项配置
@@ -78,5 +93,9 @@ func (conf *ConfigManager) SetConfig(module string, configItems map[string]strin
 	}
 
 	err := v.WriteConfig()
-	return errpack.NewError(errpack.CommonException, errpack.Config, err)
+	if err != nil {
+		return errpack.NewError(errpack.CommonException, errpack.Config, err)
+	}
+
+	return nil
 }
