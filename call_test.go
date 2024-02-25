@@ -6,18 +6,18 @@ import (
 	config "github.com/238Studio/child-nodes-config-service"
 )
 
-// 测试利用管道调用配置模块
-func TestInitConfigManager(t *testing.T) {
-
-}
 func TestSetConfig(t *testing.T) {
 	// 初始化管道
 	// 外部模块调用通道
 
 	configManger := config.InitConfigManager("./configs")
 	//todo 测试管道
-	configManger.InitModuleConfig("test")
-	err := configManger.CreateConfigTable("test")
+	err := configManger.InitModuleConfig("test")
+	if err != nil {
+		t.Error(err)
+	}
+
+	err = configManger.CreateConfigTable("test")
 	if err != nil {
 		t.Error(err)
 	}
@@ -26,17 +26,31 @@ func TestSetConfig(t *testing.T) {
 	config["test"] = "test"
 	config["test2"] = "test2"
 
-	configManger.SetConfig("test", config)
+	err = configManger.SetConfig("test", config)
+	if err != nil {
+		t.Error(err)
+	}
 
-	configManger.DeleteConfig("test", "test2")
+	err = configManger.DeleteConfig("test", "test2")
+	if err != nil {
+		t.Error(err)
+	}
 
 	var newConfig = make(map[string]string)
 	newConfig["test3"] = "test"
 	newConfig["test"] = "test2"
-	configManger.SetConfig("test", newConfig)
+	err = configManger.SetConfig("test", newConfig)
+	if err != nil {
+		t.Error(err)
+	}
 
 	item, _ := configManger.ReadConfig("test", "test")
 	t.Log(item)
+	item, _ = configManger.ReadConfig("test", "test3")
+	t.Log(item)
 
-	configManger.DeleteConfigTable("test")
+	err = configManger.DeleteConfigTable("test")
+	if err != nil {
+		t.Error(err)
+	}
 }
